@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Papa from "papaparse";
+import React, { useContext } from "react";
+import { CsvDataContext } from "./Contexts/CsvDataContext";
+
+import ThemeContainer from "./Components/ThemeContainer";
+import ThemeToggleButton from "./Components/ThemeToggleButton";
 
 function App() {
+  const { jsonData, loading } = useContext(CsvDataContext);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ThemeContainer>
+        <ThemeToggleButton />
+        <h1>Electric Vehicle Population Data</h1>
+        {loading ? "loading" : "loaded"}
+      </ThemeContainer>
     </div>
   );
 }
