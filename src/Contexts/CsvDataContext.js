@@ -123,9 +123,9 @@ export const CsvDataProvider = ({ children }) => {
       //
       setAllEVChartData((prev) => {
         const newValues = { ...prev };
-        const chatLimit = 8;
+        const chatLimit = 15;
         Object.entries(groupedCounts).forEach(([key, value]) => {
-          newValues[key] = createChartArray(value, chatLimit);
+          newValues[key] = createChartArray(key, value, chatLimit);
         });
         return newValues;
       });
@@ -136,15 +136,15 @@ export const CsvDataProvider = ({ children }) => {
 
   //#region Create Chart Array
 
-  function createChartArray(data, size) {
+  function createChartArray(key, data, size) {
     const totalCount = jsonData?.length;
     const sortedArray = Object.entries(data)
       .map(([name, count]) => ({
         name,
-        count,
+        [key]: count,
         percentage: ((count / totalCount) * 100).toFixed(2),
       }))
-      .sort((a, b) => b.count - a.count);
+      .sort((a, b) => b[key] - a[key]);
 
     if (sortedArray.length <= size) {
       return sortedArray;
@@ -153,12 +153,12 @@ export const CsvDataProvider = ({ children }) => {
     const topElements = sortedArray.slice(0, size - 1);
     const otherElements = sortedArray.slice(size - 1);
 
-    const otherCount = otherElements.reduce((sum, item) => sum + item.count, 0);
+    const otherCount = otherElements.reduce((sum, item) => sum + item[key], 0);
     const otherPercentage = ((otherCount / totalCount) * 100).toFixed(2);
 
     topElements.push({
       name: "Other",
-      count: otherCount,
+      [key]: otherCount,
       percentage: otherPercentage,
     });
 

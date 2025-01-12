@@ -36,7 +36,6 @@ code {
 }
 
 .hide-vertical-scrollbar::-webkit-scrollbar {
-  /* display: none !important; */
 }
 
 input[type="range"] {
