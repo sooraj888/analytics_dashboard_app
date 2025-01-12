@@ -4,20 +4,37 @@ import { CsvDataContext } from "./Contexts/CsvDataContext";
 
 import ThemeContainer from "./Components/ThemeContainer";
 import ThemeToggleButton from "./Components/ThemeToggleButton";
-import ElectricVehiclePopulationTable from "./Components/ElectricVehiclePopulationTable";
+import { Routes, Route, Link } from "react-router-dom";
+import {
+  AllEVInfoPage,
+  MakersInfoPage,
+  VehicleInfoPage,
+} from "./Components/Pages";
 
 function App() {
-  const { jsonData, loading } = useContext(CsvDataContext);
-
   return (
-    <div>
-      <ThemeContainer>
-        <h1>Electric Vehicle Analytics</h1>
-        <ThemeToggleButton />
-        {loading ? "loading" : "loaded"}
-        <ElectricVehiclePopulationTable />
-      </ThemeContainer>
-    </div>
+    <ThemeContainer>
+      <h1>Electric Vehicle Analytics</h1>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">All EV Analytics</Link>
+          </li>
+          <li>
+            <Link to="/evdetails">EV Details</Link>
+          </li>
+          <li>
+            <Link to="/evmakerdetails">EV Maker Details</Link>
+          </li>
+        </ul>
+      </nav>
+      <ThemeToggleButton />
+      <Routes>
+        <Route path="/" element={<AllEVInfoPage />} />
+        <Route path="/evdetails" element={<VehicleInfoPage />} />
+        <Route path="/evmakerdetails" element={<MakersInfoPage />} />
+      </Routes>
+    </ThemeContainer>
   );
 }
 

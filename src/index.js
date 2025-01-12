@@ -5,12 +5,16 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { CsvDataProvider } from "./Contexts/CsvDataContext";
 import { ThemeProvider } from "./Contexts/ThemeContext";
+import { BrowserRouter } from "react-router-dom";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ThemeProvider>
       <CsvDataProvider>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </CsvDataProvider>
     </ThemeProvider>
   </React.StrictMode>
