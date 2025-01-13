@@ -16,7 +16,8 @@ import { IoIosWarning } from "react-icons/io";
 var contentWidth = 180;
 
 const ElectricVehiclePopulationTable = () => {
-  const { tableData, filterAndSortTableData } = useContext(CsvDataContext);
+  const { tableData, filterAndSortTableData, loading } =
+    useContext(CsvDataContext);
 
   const rowGetter = ({ index }) => tableData[index];
   const [filterObject, setFilterObject] = useState({});
@@ -30,7 +31,14 @@ const ElectricVehiclePopulationTable = () => {
   }, [filterObject]);
 
   return (
-    <div style={{ padding: "10px", display: "flex", flexDirection: "column" }}>
+    <div
+      style={{
+        padding: "10px",
+        paddingBottom: "2px",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <Button
         variant="contained"
         style={{ width: 200 }}
@@ -41,426 +49,426 @@ const ElectricVehiclePopulationTable = () => {
         Clear Filter
       </Button>
 
-      {tableData?.length > 0 ? (
-        (() => {
-          return (
-            <>
-              {tableData?.length && (
-                <Table
-                  height={300}
-                  width={17 * contentWidth}
-                  headerHeight={40}
-                  rowHeight={30}
-                  rowCount={tableData?.length}
-                  rowGetter={rowGetter}
-                  style={{
-                    margin: "20px auto",
-                    border: "1px solid #ddd",
-                    width: "100%",
-                    overflowX: "auto",
-                  }}
-                >
-                  <Column
-                    label="Index"
-                    dataKey="index"
-                    width={contentWidth}
-                    cellRenderer={({ rowIndex }) => (
-                      <IndexCellRenderer index={rowIndex + 1} />
-                    )}
-                  />
-                  <Column
-                    label="VIN (1-10)"
-                    dataKey="VIN (1-10)"
-                    width={contentWidth}
-                    headerRenderer={({ label }) => {
-                      return (
-                        <ColumnHeader
-                          keyValue={label}
-                          label={label}
-                          filterObject={filterObject}
-                          setFilterObject={setFilterObject}
-                        />
-                      );
+      {tableData?.length > 0
+        ? (() => {
+            return (
+              <>
+                {tableData?.length && (
+                  <Table
+                    height={300}
+                    width={17 * contentWidth}
+                    headerHeight={40}
+                    rowHeight={30}
+                    rowCount={tableData?.length}
+                    rowGetter={rowGetter}
+                    style={{
+                      margin: "10px auto",
+                      border: "1px solid #ddd",
+                      width: "100%",
+                      overflowX: "auto",
                     }}
-                    cellRenderer={({ cellData, rowData }) => (
-                      <CustomCellRenderer
-                        cellData={cellData}
-                        rowData={rowData}
-                      />
-                    )}
-                  />
+                  >
+                    <Column
+                      label="Index"
+                      dataKey="index"
+                      width={contentWidth}
+                      cellRenderer={({ rowIndex }) => (
+                        <IndexCellRenderer index={rowIndex + 1} />
+                      )}
+                    />
+                    <Column
+                      label="VIN (1-10)"
+                      dataKey="VIN (1-10)"
+                      width={contentWidth}
+                      headerRenderer={({ label }) => {
+                        return (
+                          <ColumnHeader
+                            keyValue={label}
+                            label={label}
+                            filterObject={filterObject}
+                            setFilterObject={setFilterObject}
+                          />
+                        );
+                      }}
+                      cellRenderer={({ cellData, rowData }) => (
+                        <CustomCellRenderer
+                          cellData={cellData}
+                          rowData={rowData}
+                        />
+                      )}
+                    />
 
-                  <Column
-                    label="County"
-                    dataKey="County"
-                    width={contentWidth}
-                    headerRenderer={({ label }) => {
-                      return (
-                        <ColumnHeader
-                          keyValue={label}
-                          label={label}
-                          filterObject={filterObject}
-                          setFilterObject={setFilterObject}
+                    <Column
+                      label="County"
+                      dataKey="County"
+                      width={contentWidth}
+                      headerRenderer={({ label }) => {
+                        return (
+                          <ColumnHeader
+                            keyValue={label}
+                            label={label}
+                            filterObject={filterObject}
+                            setFilterObject={setFilterObject}
+                          />
+                        );
+                      }}
+                      cellRenderer={({ cellData, rowData }) => (
+                        <CustomCellRenderer
+                          cellData={cellData}
+                          rowData={rowData}
                         />
-                      );
-                    }}
-                    cellRenderer={({ cellData, rowData }) => (
-                      <CustomCellRenderer
-                        cellData={cellData}
-                        rowData={rowData}
-                      />
-                    )}
-                  />
-                  <Column
-                    label="City"
-                    dataKey="City"
-                    width={contentWidth}
-                    headerRenderer={({ label }) => {
-                      return (
-                        <ColumnHeader
-                          keyValue={label}
-                          label={label}
-                          filterObject={filterObject}
-                          setFilterObject={setFilterObject}
+                      )}
+                    />
+                    <Column
+                      label="City"
+                      dataKey="City"
+                      width={contentWidth}
+                      headerRenderer={({ label }) => {
+                        return (
+                          <ColumnHeader
+                            keyValue={label}
+                            label={label}
+                            filterObject={filterObject}
+                            setFilterObject={setFilterObject}
+                          />
+                        );
+                      }}
+                      cellRenderer={({ cellData, rowData }) => (
+                        <CustomCellRenderer
+                          cellData={cellData}
+                          rowData={rowData}
                         />
-                      );
-                    }}
-                    cellRenderer={({ cellData, rowData }) => (
-                      <CustomCellRenderer
-                        cellData={cellData}
-                        rowData={rowData}
-                      />
-                    )}
-                  />
-                  <Column
-                    label="State"
-                    dataKey="State"
-                    width={contentWidth}
-                    headerRenderer={({ label }) => {
-                      return (
-                        <ColumnHeader
-                          keyValue={label}
-                          label={label}
-                          filterObject={filterObject}
-                          setFilterObject={setFilterObject}
+                      )}
+                    />
+                    <Column
+                      label="State"
+                      dataKey="State"
+                      width={contentWidth}
+                      headerRenderer={({ label }) => {
+                        return (
+                          <ColumnHeader
+                            keyValue={label}
+                            label={label}
+                            filterObject={filterObject}
+                            setFilterObject={setFilterObject}
+                          />
+                        );
+                      }}
+                      cellRenderer={({ cellData, rowData }) => (
+                        <CustomCellRenderer
+                          cellData={cellData}
+                          rowData={rowData}
                         />
-                      );
-                    }}
-                    cellRenderer={({ cellData, rowData }) => (
-                      <CustomCellRenderer
-                        cellData={cellData}
-                        rowData={rowData}
-                      />
-                    )}
-                  />
-                  <Column
-                    label="Postal Code"
-                    dataKey="Postal Code"
-                    width={contentWidth}
-                    headerRenderer={({ label }) => {
-                      return (
-                        <ColumnHeader
-                          keyValue={label}
-                          label={label}
-                          isNumber={true}
-                          filterObject={filterObject}
-                          setFilterObject={setFilterObject}
+                      )}
+                    />
+                    <Column
+                      label="Postal Code"
+                      dataKey="Postal Code"
+                      width={contentWidth}
+                      headerRenderer={({ label }) => {
+                        return (
+                          <ColumnHeader
+                            keyValue={label}
+                            label={label}
+                            isNumber={true}
+                            filterObject={filterObject}
+                            setFilterObject={setFilterObject}
+                          />
+                        );
+                      }}
+                      cellRenderer={({ cellData, rowData }) => (
+                        <CustomCellRenderer
+                          cellData={cellData}
+                          rowData={rowData}
                         />
-                      );
-                    }}
-                    cellRenderer={({ cellData, rowData }) => (
-                      <CustomCellRenderer
-                        cellData={cellData}
-                        rowData={rowData}
-                      />
-                    )}
-                  />
-                  <Column
-                    label="Model Year"
-                    dataKey="Model Year"
-                    width={contentWidth}
-                    headerRenderer={({ label }) => {
-                      return (
-                        <ColumnHeader
-                          keyValue={label}
-                          label={label}
-                          isNumber={true}
-                          filterObject={filterObject}
-                          setFilterObject={setFilterObject}
+                      )}
+                    />
+                    <Column
+                      label="Model Year"
+                      dataKey="Model Year"
+                      width={contentWidth}
+                      headerRenderer={({ label }) => {
+                        return (
+                          <ColumnHeader
+                            keyValue={label}
+                            label={label}
+                            isNumber={true}
+                            filterObject={filterObject}
+                            setFilterObject={setFilterObject}
+                          />
+                        );
+                      }}
+                      cellRenderer={({ cellData, rowData }) => (
+                        <CustomCellRenderer
+                          cellData={cellData}
+                          rowData={rowData}
                         />
-                      );
-                    }}
-                    cellRenderer={({ cellData, rowData }) => (
-                      <CustomCellRenderer
-                        cellData={cellData}
-                        rowData={rowData}
-                      />
-                    )}
-                  />
-                  <Column
-                    label="Make"
-                    dataKey="Make"
-                    width={contentWidth}
-                    headerRenderer={({ label }) => {
-                      return (
-                        <ColumnHeader
-                          keyValue={label}
-                          label={label}
-                          filterObject={filterObject}
-                          setFilterObject={setFilterObject}
+                      )}
+                    />
+                    <Column
+                      label="Make"
+                      dataKey="Make"
+                      width={contentWidth}
+                      headerRenderer={({ label }) => {
+                        return (
+                          <ColumnHeader
+                            keyValue={label}
+                            label={label}
+                            filterObject={filterObject}
+                            setFilterObject={setFilterObject}
+                          />
+                        );
+                      }}
+                      cellRenderer={({ cellData, rowData }) => (
+                        <CustomCellRenderer
+                          cellData={cellData}
+                          rowData={rowData}
                         />
-                      );
-                    }}
-                    cellRenderer={({ cellData, rowData }) => (
-                      <CustomCellRenderer
-                        cellData={cellData}
-                        rowData={rowData}
-                      />
-                    )}
-                  />
-                  <Column
-                    label="Model"
-                    dataKey="Model"
-                    width={contentWidth}
-                    headerRenderer={({ label }) => {
-                      return (
-                        <ColumnHeader
-                          keyValue={label}
-                          label={label}
-                          filterObject={filterObject}
-                          setFilterObject={setFilterObject}
+                      )}
+                    />
+                    <Column
+                      label="Model"
+                      dataKey="Model"
+                      width={contentWidth}
+                      headerRenderer={({ label }) => {
+                        return (
+                          <ColumnHeader
+                            keyValue={label}
+                            label={label}
+                            filterObject={filterObject}
+                            setFilterObject={setFilterObject}
+                          />
+                        );
+                      }}
+                      cellRenderer={({ cellData, rowData }) => (
+                        <CustomCellRenderer
+                          cellData={cellData}
+                          rowData={rowData}
                         />
-                      );
-                    }}
-                    cellRenderer={({ cellData, rowData }) => (
-                      <CustomCellRenderer
-                        cellData={cellData}
-                        rowData={rowData}
-                      />
-                    )}
-                  />
-                  <Column
-                    label="Electric Vehicle Type"
-                    dataKey="Electric Vehicle Type"
-                    width={contentWidth}
-                    headerRenderer={({ label }) => {
-                      return (
-                        <ColumnHeader
-                          keyValue={label}
-                          label={label}
-                          filterObject={filterObject}
-                          setFilterObject={setFilterObject}
+                      )}
+                    />
+                    <Column
+                      label="Electric Vehicle Type"
+                      dataKey="Electric Vehicle Type"
+                      width={contentWidth}
+                      headerRenderer={({ label }) => {
+                        return (
+                          <ColumnHeader
+                            keyValue={label}
+                            label={label}
+                            filterObject={filterObject}
+                            setFilterObject={setFilterObject}
+                          />
+                        );
+                      }}
+                      cellRenderer={({ cellData, rowData }) => (
+                        <CustomCellRenderer
+                          cellData={cellData}
+                          rowData={rowData}
+                          fontsize={"0.8rem"}
                         />
-                      );
-                    }}
-                    cellRenderer={({ cellData, rowData }) => (
-                      <CustomCellRenderer
-                        cellData={cellData}
-                        rowData={rowData}
-                        fontsize={"0.8rem"}
-                      />
-                    )}
-                  />
-                  <Column
-                    label="CAFV Eligibility"
-                    dataKey="Clean Alternative Fuel Vehicle (CAFV) Eligibility"
-                    width={contentWidth}
-                    headerRenderer={({ label }) => {
-                      return (
-                        <ColumnHeader
-                          keyValue={
-                            "Clean Alternative Fuel Vehicle (CAFV) Eligibility"
-                          }
-                          label={label}
-                          filterObject={filterObject}
-                          setFilterObject={setFilterObject}
+                      )}
+                    />
+                    <Column
+                      label="CAFV Eligibility"
+                      dataKey="Clean Alternative Fuel Vehicle (CAFV) Eligibility"
+                      width={contentWidth}
+                      headerRenderer={({ label }) => {
+                        return (
+                          <ColumnHeader
+                            keyValue={
+                              "Clean Alternative Fuel Vehicle (CAFV) Eligibility"
+                            }
+                            label={label}
+                            filterObject={filterObject}
+                            setFilterObject={setFilterObject}
+                          />
+                        );
+                      }}
+                      cellRenderer={({ cellData, rowData }) => (
+                        <CustomCellRenderer
+                          cellData={cellData}
+                          rowData={rowData}
+                          fontsize={"0.8rem"}
                         />
-                      );
-                    }}
-                    cellRenderer={({ cellData, rowData }) => (
-                      <CustomCellRenderer
-                        cellData={cellData}
-                        rowData={rowData}
-                        fontsize={"0.8rem"}
-                      />
-                    )}
-                  />
-                  <Column
-                    label="Electric Range"
-                    dataKey="Electric Range"
-                    width={contentWidth}
-                    headerRenderer={({ label }) => {
-                      return (
-                        <ColumnHeader
-                          keyValue={label}
-                          label={label}
-                          isNumber={true}
-                          filterObject={filterObject}
-                          setFilterObject={setFilterObject}
+                      )}
+                    />
+                    <Column
+                      label="Electric Range"
+                      dataKey="Electric Range"
+                      width={contentWidth}
+                      headerRenderer={({ label }) => {
+                        return (
+                          <ColumnHeader
+                            keyValue={label}
+                            label={label}
+                            isNumber={true}
+                            filterObject={filterObject}
+                            setFilterObject={setFilterObject}
+                          />
+                        );
+                      }}
+                      cellRenderer={({ cellData, rowData }) => (
+                        <CustomCellRenderer
+                          cellData={cellData}
+                          rowData={rowData}
                         />
-                      );
-                    }}
-                    cellRenderer={({ cellData, rowData }) => (
-                      <CustomCellRenderer
-                        cellData={cellData}
-                        rowData={rowData}
-                      />
-                    )}
-                  />
-                  <Column
-                    label="Base MSRP"
-                    dataKey="Base MSRP"
-                    width={contentWidth}
-                    headerRenderer={({ label }) => {
-                      return (
-                        <ColumnHeader
-                          keyValue={label}
-                          label={label}
-                          isNumber={true}
-                          filterObject={filterObject}
-                          setFilterObject={setFilterObject}
+                      )}
+                    />
+                    <Column
+                      label="Base MSRP"
+                      dataKey="Base MSRP"
+                      width={contentWidth}
+                      headerRenderer={({ label }) => {
+                        return (
+                          <ColumnHeader
+                            keyValue={label}
+                            label={label}
+                            isNumber={true}
+                            filterObject={filterObject}
+                            setFilterObject={setFilterObject}
+                          />
+                        );
+                      }}
+                      cellRenderer={({ cellData, rowData }) => (
+                        <CustomCellRenderer
+                          cellData={cellData}
+                          rowData={rowData}
                         />
-                      );
-                    }}
-                    cellRenderer={({ cellData, rowData }) => (
-                      <CustomCellRenderer
-                        cellData={cellData}
-                        rowData={rowData}
-                      />
-                    )}
-                  />
-                  <Column
-                    label="Legislative District"
-                    dataKey="Legislative District"
-                    width={contentWidth}
-                    headerRenderer={({ label }) => {
-                      return (
-                        <ColumnHeader
-                          keyValue={label}
-                          label={label}
-                          isNumber={true}
-                          filterObject={filterObject}
-                          setFilterObject={setFilterObject}
+                      )}
+                    />
+                    <Column
+                      label="Legislative District"
+                      dataKey="Legislative District"
+                      width={contentWidth}
+                      headerRenderer={({ label }) => {
+                        return (
+                          <ColumnHeader
+                            keyValue={label}
+                            label={label}
+                            isNumber={true}
+                            filterObject={filterObject}
+                            setFilterObject={setFilterObject}
+                          />
+                        );
+                      }}
+                      cellRenderer={({ cellData, rowData }) => (
+                        <CustomCellRenderer
+                          cellData={cellData}
+                          rowData={rowData}
                         />
-                      );
-                    }}
-                    cellRenderer={({ cellData, rowData }) => (
-                      <CustomCellRenderer
-                        cellData={cellData}
-                        rowData={rowData}
-                      />
-                    )}
-                  />
-                  <Column
-                    label="DOL Vehicle ID"
-                    dataKey="DOL Vehicle ID"
-                    width={contentWidth}
-                    headerRenderer={({ label }) => {
-                      return (
-                        <ColumnHeader
-                          keyValue={label}
-                          label={label}
-                          isNumber={true}
-                          filterObject={filterObject}
-                          setFilterObject={setFilterObject}
+                      )}
+                    />
+                    <Column
+                      label="DOL Vehicle ID"
+                      dataKey="DOL Vehicle ID"
+                      width={contentWidth}
+                      headerRenderer={({ label }) => {
+                        return (
+                          <ColumnHeader
+                            keyValue={label}
+                            label={label}
+                            isNumber={true}
+                            filterObject={filterObject}
+                            setFilterObject={setFilterObject}
+                          />
+                        );
+                      }}
+                      cellRenderer={({ cellData, rowData }) => (
+                        <CustomCellRenderer
+                          cellData={cellData}
+                          rowData={rowData}
                         />
-                      );
-                    }}
-                    cellRenderer={({ cellData, rowData }) => (
-                      <CustomCellRenderer
-                        cellData={cellData}
-                        rowData={rowData}
-                      />
-                    )}
-                  />
-                  <Column
-                    label="Vehicle Location"
-                    dataKey="Vehicle Location"
-                    width={contentWidth}
-                    headerRenderer={({ label }) => {
-                      return (
-                        <ColumnHeader
-                          keyValue={label}
-                          label={label}
-                          filterObject={filterObject}
-                          setFilterObject={setFilterObject}
+                      )}
+                    />
+                    <Column
+                      label="Vehicle Location"
+                      dataKey="Vehicle Location"
+                      width={contentWidth}
+                      headerRenderer={({ label }) => {
+                        return (
+                          <ColumnHeader
+                            keyValue={label}
+                            label={label}
+                            filterObject={filterObject}
+                            setFilterObject={setFilterObject}
+                          />
+                        );
+                      }}
+                      cellRenderer={({ cellData, rowData }) => (
+                        <CustomCellRenderer
+                          cellData={cellData}
+                          rowData={rowData}
+                          fontsize={"0.8rem"}
                         />
-                      );
-                    }}
-                    cellRenderer={({ cellData, rowData }) => (
-                      <CustomCellRenderer
-                        cellData={cellData}
-                        rowData={rowData}
-                        fontsize={"0.8rem"}
-                      />
-                    )}
-                  />
-                  <Column
-                    label="Electric Utility"
-                    dataKey="Electric Utility"
-                    width={contentWidth}
-                    headerRenderer={({ label }) => {
-                      return (
-                        <ColumnHeader
-                          keyValue={label}
-                          label={label}
-                          filterObject={filterObject}
-                          setFilterObject={setFilterObject}
+                      )}
+                    />
+                    <Column
+                      label="Electric Utility"
+                      dataKey="Electric Utility"
+                      width={contentWidth}
+                      headerRenderer={({ label }) => {
+                        return (
+                          <ColumnHeader
+                            keyValue={label}
+                            label={label}
+                            filterObject={filterObject}
+                            setFilterObject={setFilterObject}
+                          />
+                        );
+                      }}
+                      cellRenderer={({ cellData, rowData }) => (
+                        <CustomCellRenderer
+                          cellData={cellData}
+                          rowData={rowData}
+                          fontsize={"0.8rem"}
                         />
-                      );
-                    }}
-                    cellRenderer={({ cellData, rowData }) => (
-                      <CustomCellRenderer
-                        cellData={cellData}
-                        rowData={rowData}
-                        fontsize={"0.8rem"}
-                      />
-                    )}
-                  />
-                  <Column
-                    label="2020 Census Tract"
-                    dataKey="2020 Census Tract"
-                    width={contentWidth}
-                    headerRenderer={({ label }) => {
-                      return (
-                        <ColumnHeader
-                          keyValue={label}
-                          label={label}
-                          isNumber={true}
-                          filterObject={filterObject}
-                          setFilterObject={setFilterObject}
+                      )}
+                    />
+                    <Column
+                      label="2020 Census Tract"
+                      dataKey="2020 Census Tract"
+                      width={contentWidth}
+                      headerRenderer={({ label }) => {
+                        return (
+                          <ColumnHeader
+                            keyValue={label}
+                            label={label}
+                            isNumber={true}
+                            filterObject={filterObject}
+                            setFilterObject={setFilterObject}
+                          />
+                        );
+                      }}
+                      cellRenderer={({ cellData, rowData }) => (
+                        <CustomCellRenderer
+                          cellData={cellData}
+                          rowData={rowData}
                         />
-                      );
-                    }}
-                    cellRenderer={({ cellData, rowData }) => (
-                      <CustomCellRenderer
-                        cellData={cellData}
-                        rowData={rowData}
-                      />
-                    )}
-                  />
-                </Table>
-              )}
-            </>
-          );
-        })()
-      ) : (
-        <div
-          style={{
-            color: "red",
-            padding: "100px 0px",
-            display: "flex",
-            alignItems: "center",
-            alignSelf: "center",
-          }}
-          onClick={() => {
-            ClearFilter();
-          }}
-        >
-          <IoIosWarning color="yellow" style={{ margin: "10px" }} />
-          Filtered data Not Found Clear The Filter
-        </div>
-      )}
+                      )}
+                    />
+                  </Table>
+                )}
+              </>
+            );
+          })()
+        : !loading && (
+            <div
+              style={{
+                color: "red",
+                padding: "100px 0px",
+                display: "flex",
+                alignItems: "center",
+                alignSelf: "center",
+              }}
+              onClick={() => {
+                ClearFilter();
+              }}
+            >
+              <IoIosWarning color="yellow" style={{ margin: "10px" }} />
+              Filtered data Not Found Clear The Filter
+            </div>
+          )}
     </div>
   );
 };

@@ -7,6 +7,7 @@
 h2 {
   font-size: 1.2rem;
   text-align: center;
+  font-weight: bold;
 }
 h3 {
   font-size: 1rem;
@@ -15,6 +16,8 @@ h3 {
 .custom-line {
   height: 2px;
   background-color: var(--text-color);
-  width: 30%;
+  width: 50%;
   align-self: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }

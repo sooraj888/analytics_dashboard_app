@@ -24,8 +24,8 @@ export default function Example({ data, dataKey }) {
         data={data}
         margin={{
           top: 5,
-          right: 30,
-          left: 20,
+          // right: 30,
+          // left: 20,
           bottom: 5,
         }}
         barSize={20}
@@ -33,10 +33,10 @@ export default function Example({ data, dataKey }) {
       >
         <XAxis dataKey="name" scale="point" padding={{ left: 10, right: 10 }} />
         <YAxis />
-        <Tooltip />
+        <Tooltip labelStyle={{ color: "black" }} />
         <Legend />
-        <CartesianGrid strokeDasharray="3 3" />
-        <Bar dataKey={dataKey} fill="green" background={{ fill: "#eee" }} />
+        <CartesianGrid strokeDasharray="1 3" />
+        <Bar dataKey={dataKey} fill="#1E90FF" />
       </BarChart>
     </div>
   );
