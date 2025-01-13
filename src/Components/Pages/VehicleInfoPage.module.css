@@ -1,0 +1,41 @@
+.pageContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.searchBoxContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.textField {
+  width: 100%;
+  max-width: 500px;
+}
+
+.buttonGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+.suggestionButton {
+  font-size: 0.75rem;
+  padding: 4px 8px;
+}
+
+.searchButton {
+  margin-top: 20px;
+  padding: 10px 20px;
+}
