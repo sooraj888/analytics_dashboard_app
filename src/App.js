@@ -1,38 +1,22 @@
-import "./App.css";
-import React, { useContext } from "react";
-import { CsvDataContext } from "./Contexts/CsvDataContext";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 
-import ThemeContainer from "./Components/ThemeContainer";
-import ThemeToggleButton from "./Components/ThemeToggleButton";
-import { Routes, Route, Link } from "react-router-dom";
 import {
   AllEVInfoPage,
   MakersInfoPage,
   VehicleInfoPage,
 } from "./Components/Pages";
+import ThemeContainer from "./Components/ThemeContainer";
+import Header from "./Components/Header";
 
 function App() {
   return (
     <ThemeContainer>
-      <h1>Electric Vehicle Analytics</h1>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">All EV Analytics</Link>
-          </li>
-          <li>
-            <Link to="/evdetails">EV Details</Link>
-          </li>
-          <li>
-            <Link to="/evmakerdetails">EV Maker Details</Link>
-          </li>
-        </ul>
-      </nav>
-      <ThemeToggleButton />
+      <Header />
       <Routes>
         <Route path="/" element={<AllEVInfoPage />} />
-        <Route path="/evdetails" element={<VehicleInfoPage />} />
-        <Route path="/evmakerdetails" element={<MakersInfoPage />} />
+        <Route path="/ev-details" element={<VehicleInfoPage />} />
+        <Route path="/ev-maker-details" element={<MakersInfoPage />} />
       </Routes>
     </ThemeContainer>
   );

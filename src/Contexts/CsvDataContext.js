@@ -123,9 +123,35 @@ export const CsvDataProvider = ({ children }) => {
       //
       setAllEVChartData((prev) => {
         const newValues = { ...prev };
-        const chatLimit = 15;
+        const chatLimit = {
+          "VIN (1-10)": { limit: 15, sortDescending: true },
+          County: { limit: 15, sortDescending: true },
+          City: { limit: 15, sortDescending: true },
+          State: { limit: 15, sortDescending: true },
+          "Postal Code": { limit: 15, sortDescending: true },
+          "Model Year": { limit: 15, sortDescending: false },
+          Make: { limit: 15, sortDescending: true },
+          Model: { limit: 15, sortDescending: true },
+          "Electric Vehicle Type": { limit: 15, sortDescending: true },
+          "Clean Alternative Fuel Vehicle (CAFV) Eligibility": {
+            limit: 15,
+            sortDescending: true,
+          },
+          "Electric Range": { limit: 8, sortDescending: true },
+          "Base MSRP": { limit: 15, sortDescending: true },
+          "Legislative District": { limit: 15, sortDescending: true },
+          "DOL Vehicle ID": { limit: 15, sortDescending: true },
+          "Vehicle Location": { limit: 15, sortDescending: true },
+          "Electric Utility": { limit: 15, sortDescending: true },
+          "2020 Census Tract": { limit: 15, sortDescending: true },
+        };
         Object.entries(groupedCounts).forEach(([key, value]) => {
-          newValues[key] = createChartArray(key, value, chatLimit);
+          newValues[key] = createChartArray(
+            key,
+            value,
+            chatLimit[key]?.limit || 15,
+            chatLimit[key]?.sortDescending
+          );
         });
         return newValues;
       });
@@ -136,33 +162,39 @@ export const CsvDataProvider = ({ children }) => {
 
   //#region Create Chart Array
 
-  function createChartArray(key, data, size) {
+  function createChartArray(key, data, size, sortDescending) {
     const totalCount = jsonData?.length;
-    const sortedArray = Object.entries(data)
-      .map(([name, count]) => ({
-        name,
-        [key]: count,
-        percentage: ((count / totalCount) * 100).toFixed(2),
-      }))
-      .sort((a, b) => b[key] - a[key]);
+    let sortedArray = Object.entries(data).map(([name, count]) => ({
+      name,
+      [key]: count,
+      percentage: ((count / totalCount) * 100).toFixed(2),
+    }));
 
-    if (sortedArray.length <= size) {
-      return sortedArray;
+    if (sortDescending) {
+      sortedArray = sortedArray.sort((a, b) => b[key] - a[key]);
+
+      if (sortedArray.length <= size) {
+        return sortedArray;
+      }
+
+      const topElements = sortedArray.slice(0, size - 1);
+      const otherElements = sortedArray.slice(size - 1);
+
+      const otherCount = otherElements.reduce(
+        (sum, item) => sum + item[key],
+        0
+      );
+      const otherPercentage = ((otherCount / totalCount) * 100).toFixed(2);
+
+      topElements.push({
+        name: "Other",
+        [key]: otherCount,
+        percentage: otherPercentage,
+      });
+      return topElements;
     }
 
-    const topElements = sortedArray.slice(0, size - 1);
-    const otherElements = sortedArray.slice(size - 1);
-
-    const otherCount = otherElements.reduce((sum, item) => sum + item[key], 0);
-    const otherPercentage = ((otherCount / totalCount) * 100).toFixed(2);
-
-    topElements.push({
-      name: "Other",
-      [key]: otherCount,
-      percentage: otherPercentage,
-    });
-
-    return topElements;
+    return sortedArray;
   }
   //#endregion
 

@@ -1,0 +1,102 @@
+:root {
+  --link-color: #007bff;
+  --link-hover-color: #0056b3;
+}
+
+[data-theme="dark"] {
+  --link-color: #4fc3f7;
+  --link-hover-color: #29b6f6;
+}
+
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 10px 0;
+  background-color: var(--background-color);
+  border-bottom: 2px solid var(--text-color);
+}
+
+.headerContainer h1 {
+  font-size: 2.5rem;
+  margin: 0;
+  color: var(--text-color);
+  text-align: center;
+  align-self: self-start;
+  padding-left: 1rem;
+}
+
+.headerContainer > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+  padding: 0 20px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  margin-right: 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--link-color);
+  font-size: 1.1rem;
+}
+
+nav ul li a:hover {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+.ThemeToggleButton {
+  margin-left: auto;
+}
+
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+  nav ul li {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  nav ul li:last-child {
+    margin-bottom: 0;
+  }
+
+  .ThemeToggleButton {
+    margin-left: 0;
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .headerContainer h1 {
+    font-size: 1.8rem;
+  }
+
+  nav ul li a {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 200px) {
+  .headerContainer > div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
