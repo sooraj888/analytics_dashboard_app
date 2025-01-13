@@ -205,7 +205,7 @@ export const SearchBoxWithSmallButtons = ({
   );
 };
 
-function createChartArray(key, data, size, sortDescending, totalCount) {
+export function createChartArray(key, data, size, sortDescending, totalCount) {
   let sortedArray = Object.entries(data).map(([name, count]) => ({
     name,
     [key]: count,

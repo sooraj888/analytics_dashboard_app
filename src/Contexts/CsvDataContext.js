@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import Papa from "papaparse";
+import { createChartArray } from "../Components/Pages/VehicleInfoPage";
 
 export const CsvDataContext = createContext();
 
@@ -161,7 +162,8 @@ export const CsvDataProvider = ({ children }) => {
             key,
             value,
             chatLimit[key]?.limit || 15,
-            chatLimit[key]?.sortDescending
+            chatLimit[key]?.sortDescending,
+            jsonData?.length
           );
         });
         return newValues;
@@ -169,44 +171,6 @@ export const CsvDataProvider = ({ children }) => {
       //
     }
   }, [jsonData]);
-  //#endregion
-
-  //#region Create Chart Array
-
-  function createChartArray(key, data, size, sortDescending) {
-    const totalCount = jsonData?.length;
-    let sortedArray = Object.entries(data).map(([name, count]) => ({
-      name,
-      [key]: count,
-      percentage: ((count / totalCount) * 100).toFixed(2),
-    }));
-
-    if (sortDescending) {
-      sortedArray = sortedArray.sort((a, b) => b[key] - a[key]);
-
-      if (sortedArray.length <= size) {
-        return sortedArray;
-      }
-
-      const topElements = sortedArray.slice(0, size - 1);
-      const otherElements = sortedArray.slice(size - 1);
-
-      const otherCount = otherElements.reduce(
-        (sum, item) => sum + item[key],
-        0
-      );
-      const otherPercentage = ((otherCount / totalCount) * 100).toFixed(2);
-
-      topElements.push({
-        name: "Other",
-        [key]: otherCount,
-        percentage: otherPercentage,
-      });
-      return topElements;
-    }
-
-    return sortedArray;
-  }
   //#endregion
 
   return (
