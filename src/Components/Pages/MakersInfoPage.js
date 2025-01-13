@@ -9,7 +9,7 @@ export default function MakersInfoPage() {
   const { jsonData, allEVChartData } = useContext(CsvDataContext);
 
   const handleSearch = (query) => {
-    alert(`Parent handling search for: ${query}`);
+    // alert(`Parent handling search for: ${query}`);
     setInputValue(""); // Clear the input after search if needed
   };
 
@@ -31,7 +31,7 @@ export default function MakersInfoPage() {
         setInputValue={setInputValue}
         onSearch={handleSearch} // Pass the search handler as a prop
       />
-      {JSON.stringify(allEVChartData?.["Make"])}
+      {/* {JSON.stringify(allEVChartData?.["Make"])} */}
     </div>
   );
 }
