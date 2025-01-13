@@ -39,9 +39,10 @@ export const CsvDataProvider = ({ children }) => {
   const filterAndSortTableData = (
     filters = {},
     keyValue,
-    ascendingOrder = "asc"
+    ascendingOrder = "asc",
+    isNumber
   ) => {
-    const filteredData = jsonData.filter((item) => {
+    const filteredData = jsonData?.filter((item) => {
       return Object.entries(filters).every(([filterKey, filterValue]) => {
         const itemValue = item[filterKey] ?? "";
 
@@ -62,24 +63,34 @@ export const CsvDataProvider = ({ children }) => {
           .includes(filterValue.toLowerCase());
       });
     });
-
-    sortData([...filteredData], keyValue, ascendingOrder);
+    if (filteredData != null) {
+      sortData([...filteredData], keyValue, ascendingOrder, isNumber);
+    }
   };
 
-  const sortTableData = (keyValue, ascendingOrder = "asc") => {
-    sortData([...tableData], keyValue, ascendingOrder);
+  const sortTableData = (
+    keyValue,
+    ascendingOrder = "asc",
+    isNumber = false
+  ) => {
+    sortData([...tableData], keyValue, ascendingOrder, isNumber);
   };
 
-  const sortData = (data, keyValue, ascendingOrder = "asc") => {
+  const sortData = (
+    data,
+    keyValue,
+    ascendingOrder = "asc",
+    isNumber = false
+  ) => {
     const sorted = [...data].sort((a, b) => {
       const aValue = a[keyValue] ?? "";
       const bValue = b[keyValue] ?? "";
 
-      if (typeof aValue === "number" && typeof bValue === "number") {
+      if (isNumber) {
         return ascendingOrder === "asc" ? aValue - bValue : bValue - aValue;
       }
 
-      if (typeof aValue === "string" && typeof bValue === "string") {
+      if (!isNumber) {
         return ascendingOrder === "asc"
           ? aValue.localeCompare(bValue)
           : bValue.localeCompare(aValue);
