@@ -14,7 +14,6 @@ export default function MakersInfoPage() {
     useState(null);
   const handleSearch = (query) => {
     setVehicleTotalDetails(jsonData.filter((item) => item["Make"] == query));
-    console.log(jsonData.filter((item) => item["Make"] == query));
     setInputValue("");
   };
 

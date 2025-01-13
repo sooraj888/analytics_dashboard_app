@@ -66,7 +66,6 @@ export default function AllEVInfoPage() {
           dataKey={"Electric Range"}
         />
       </div>
-      {console.log(allEVChartData)}
     </div>
   );
 }

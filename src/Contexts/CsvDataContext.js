@@ -59,9 +59,9 @@ export const CsvDataProvider = ({ children }) => {
         }
         // Default string matching
         return itemValue
-          .toString()
-          .toLowerCase()
-          .includes(filterValue.toLowerCase());
+          ?.toString()
+          ?.toLowerCase()
+          ?.includes(filterValue?.toLowerCase());
       });
     });
     if (filteredData != null) {

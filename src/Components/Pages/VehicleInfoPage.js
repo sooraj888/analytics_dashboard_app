@@ -12,7 +12,6 @@ export default function VehicleInfoPage() {
     useState(null);
   const handleSearch = (query) => {
     setVehicleTotalDetails(jsonData.filter((item) => item["Model"] == query));
-    console.log(jsonData.filter((item) => item["Model"] == query));
     setInputValue("");
   };
 
@@ -184,7 +183,7 @@ export const SearchBoxWithSmallButtons = ({
             style={{
               backgroundColor:
                 inputValue &&
-                suggestion.toLowerCase().startsWith(inputValue.toLowerCase())
+                suggestion?.toLowerCase()?.startsWith(inputValue?.toLowerCase())
                   ? "lightblue"
                   : "white",
             }}
